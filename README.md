@@ -4,7 +4,7 @@ I'm trying to set the best architecture in order to unit test UI.
 MVPView is a mix of MVP and MVVM, some might call this architecture MVPVM (Model View Presenter ViewModel), which consists in an additional ViewModel layer on MVP architecture.
 
 ## Observations
-This is the MVPView implementation, I've also developed [MVVM](https://github.com/luniderelias/MVVM-Base-Kotlin) and MVPLiveData examples.
+This is the MVPView implementation, I've also developed [MVVM](https://github.com/luniderelias/MVVM-Base-Kotlin) and [MVPLiveData](https://github.com/luniderelias/MVPLiveData-Base-Kotlin) examples.
 This project is a study to understand the better approach in order to unit test UI of Android Apps without using any instrumented test.
 The key points of MVPView is that this architecture fits with LiveData as it uses ViewModel, thus contributing to reactive programming and enabling UI unit tests. But it also has a Presenter, so we can input business logic at presenter only and more complex UI logic goes into ViewModel.
 Although its a good architecture, I think its more complex than MVVM and its easy for beginner developers to make a mistake by including business logic on ViewModel or updating UI directly from Presenter. 
