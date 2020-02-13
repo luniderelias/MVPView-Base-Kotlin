@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.mvvm_base_kotlin.ExampleViewModel" />
+            type="com.example.mvpview_base_kotlin.viewmodel.ExampleViewModel" />
 
         <import type="android.view.View" />
     </data>
@@ -45,7 +45,6 @@
             android:id="@+id/appCompatImageView"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:onClick="@{view -> viewModel.onReload(view)}"
             android:visibility="@{viewModel.onReloadVisibility}"
             android:src="@drawable/ic_try_again"
             app:layout_constraintBottom_toBottomOf="parent"

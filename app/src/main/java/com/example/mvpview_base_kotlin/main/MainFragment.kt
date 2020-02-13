@@ -1,4 +1,4 @@
-package com.example.mvvm_base_kotlin
+package com.example.mvpview_base_kotlin.main
 
 import android.app.Application
 import android.os.Bundle
@@ -8,16 +8,16 @@ import android.view.ViewGroup
 import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.mvvm_base_kotlin.base.application.App
-import com.example.mvvm_base_kotlin.data.ExampleRepository
-import com.example.mvvm_base_kotlin.data.ExampleRepositoryMock
-import com.example.mvvm_base_kotlin.databinding.FragmentMainBinding
+import com.example.mvpview_base_kotlin.base.extensions.injectPresenter
+import com.example.mvpview_base_kotlin.databinding.FragmentMainBinding
+import com.example.mvpview_base_kotlin.viewmodel.ExampleViewModel
+import com.example.mvpview_base_kotlin.viewmodel.ExampleViewModelFactory
 
-class MainFragment: Fragment() {
+class MainFragment: Fragment(), MainContract.View {
 
+    override val presenter by injectPresenter(this)
 
-    private lateinit var viewModel: ExampleViewModel
+    override lateinit var viewModel: ExampleViewModel
 
     companion object {
         fun newInstance() = MainFragment()
@@ -28,20 +28,28 @@ class MainFragment: Fragment() {
 
         this.activity?.application?.let {
             viewModel = createViewModel(it)
-            viewModel.load()
             binding.viewModel = viewModel
             binding.lifecycleOwner = this
+            initPresenter()
             this.lifecycle.addObserver(viewModel)
         }
+
+        binding.appCompatImageView.setOnClickListener { onReload() }
 
         return binding.root
     }
 
     private fun createViewModel(application: Application): ExampleViewModel {
-        val repository = ExampleRepositoryMock()
-
-        val factory = ExampleViewModelFactory(repository, application)
+        val factory = ExampleViewModelFactory(application)
 
         return ViewModelProvider(this, factory).get(ExampleViewModel::class.java)
+    }
+
+    override fun initPresenter() {
+        presenter.init(viewModel)
+    }
+
+    private fun onReload() {
+        presenter.loadData()
     }
 }

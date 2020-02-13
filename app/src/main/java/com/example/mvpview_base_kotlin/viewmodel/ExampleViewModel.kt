@@ -1,14 +1,11 @@
-package com.example.mvvm_base_kotlin
+package com.example.mvpview_base_kotlin.viewmodel
 
 import android.app.Application
-import android.view.View
 import androidx.lifecycle.*
-import com.example.mvvm_base_kotlin.base.extensions.shouldShowView
-import com.example.mvvm_base_kotlin.data.ExampleData
-import com.example.mvvm_base_kotlin.data.ExampleRepositoryMock
+import com.example.mvpview_base_kotlin.base.extensions.shouldShowView
+import com.example.mvpview_base_kotlin.data.ExampleData
 
 class ExampleViewModel(
-    private val repository: ExampleRepositoryMock,
     application: Application
 ) : AndroidViewModel(application), LifecycleObserver {
 
@@ -19,10 +16,11 @@ class ExampleViewModel(
     var response = MutableLiveData<ExampleData>()
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
-    fun load() {
-        handleTextVisibility(false)
+    fun load() {}
 
-        response = repository.getExample()
+    fun setExampleData(exampleData: ExampleData){
+        handleTextVisibility(false)
+        response.postValue(exampleData)
         message.postValue(response.value?.message)
         handleTextVisibility(true)
     }
@@ -30,10 +28,6 @@ class ExampleViewModel(
     private fun handleTextVisibility(visibility: Boolean) {
         textVisibility.postValue(visibility.shouldShowView)
         loadingVisibility.postValue((!visibility).shouldShowView)
-    }
-
-    fun onReload(view: View) {
-        load()
     }
 
 }

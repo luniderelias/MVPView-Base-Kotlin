@@ -1,4 +1,4 @@
-package com.example.mvvm_base_kotlin
+package com.example.mvpview_base_kotlin
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

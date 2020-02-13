@@ -1,9 +1,9 @@
-package com.example.mvvm_base_kotlin.base.application
+package com.example.mvpview_base_kotlin.base.application
 
 import android.app.Application
 import android.content.Context
-import com.example.mvvm_base_kotlin.base.appModule
-import com.example.mvvm_base_kotlin.base.dispatcherModule
+import com.example.mvpview_base_kotlin.base.appModule
+import com.example.mvpview_base_kotlin.base.dispatcherModule
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.android.startKoin
 

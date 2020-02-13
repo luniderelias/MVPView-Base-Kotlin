@@ -1,4 +1,4 @@
-package com.example.mvvm_base_kotlin.base.extensions
+package com.example.mvpview_base_kotlin.base.extensions
 
 import android.view.View
 
